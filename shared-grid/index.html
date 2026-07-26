@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Shared Grid</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23111'/><text y='72' x='50' font-size='64' text-anchor='middle' fill='%23a6e14e'>%23</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top bar: scores + timer -->
+    <header class="topbar">
+      <div class="score you">
+        <span class="score-label">YOU</span>
+        <span class="score-val" id="youScore">0</span>
+      </div>
+      <div class="timer" id="timer">2:00</div>
+      <div class="score bot">
+        <span class="score-label">BOT</span>
+        <span class="score-val" id="botScore">0</span>
+      </div>
+      <div class="bot-toast" id="botToast">Bot locked a link</div>
+    </header>
+
+    <!-- Target -->
+    <div class="target-wrap">
+      <span class="target-label">TARGET</span>
+      <span class="target-val" id="target">—</span>
+    </div>
+
+    <!-- Board -->
+    <div class="board-wrap" id="boardWrap">
+      <svg id="board" viewBox="0 0 360 360" role="grid" aria-label="Number grid">
+        <g id="edgeLayer"></g>
+        <polyline id="pathLine" points="" />
+        <g id="cellLayer"></g>
+      </svg>
+    </div>
+
+    <!-- Legend: what the edge colours mean -->
+    <div class="legend">
+      <span class="key"><span class="dot you"></span>You</span>
+      <span class="key"><span class="dot bot"></span>Bot</span>
+      <span class="key"><span class="dot open"></span>Open</span>
+    </div>
+
+    <!-- Running expression -->
+    <div class="expr-row">
+      <span class="expr" id="expr">Tap a number to start</span>
+    </div>
+
+    <!-- Message line -->
+    <div class="msg-row">
+      <span class="msg" id="msg">&nbsp;</span>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="clearBtn" class="btn ghost">Clear</button>
+      <button id="submitBtn" class="btn" disabled>Submit</button>
+    </div>
+
+    <p class="instructions">
+      Trace a route to hit the target. Every route you use is gone for both of you.
+    </p>
+  </div>
+
+  <!-- End screen -->
+  <div class="overlay hidden" id="endScreen">
+    <div class="end-card">
+      <h1 class="end-title" id="endScoreLine">You 0 — Bot 0</h1>
+      <p class="end-sub" id="endRerouteLine">Their locks forced you to reroute 0 times.</p>
+      <button class="btn big" id="playAgain">Play again</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
